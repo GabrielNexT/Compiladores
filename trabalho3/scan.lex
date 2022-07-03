@@ -15,6 +15,7 @@ EQ      "=="
 NE      "!="
 
 PE      "+="
+PP      "++"
 
 OR      ({LT}|{LE}|{EQ}|{NE})
 
@@ -38,7 +39,7 @@ DC      "const"
 }
 
 {OR}    { 
-    yylval.c = novo + yytext;
+    yylval.c = vector<string>() + yytext;
     return OR_T;
 }
 
@@ -62,6 +63,10 @@ DC      "const"
     return PE_T;
 }
 
+{PP}    {
+    return PP_T;
+}
+
 {FOR}   {
     return FOR_T;
 }
@@ -83,23 +88,23 @@ DC      "const"
 }
 
 {INT}   {
-    yylval.c = novo + yytext; return NUM_T; 
+    yylval.c = vector<string>() + yytext; return NUM_T; 
 }
 
 {FLOAT} {
-    yylval.c = novo + yytext; return NUM_T; 
+    yylval.c = vector<string>() + yytext; return NUM_T; 
 }
 
 {ID}    {
-    yylval.c = novo + yytext; return ID_T; 
+    yylval.c = vector<string>() + yytext; return ID_T; 
 }
 
 {STRING}    {
-    yylval.c = novo + yytext; return STRING_T;
+    yylval.c = vector<string>() + yytext; return STRING_T;
 }
 
 .   {
-    yylval.c = novo + yytext; return yytext[0]; 
+    yylval.c = vector<string>() + yytext; return yytext[0]; 
 }
 
 %%
